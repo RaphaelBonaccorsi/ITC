@@ -35,7 +35,7 @@ def receive_terminalSymbols(): # Criar try except para verificar se o primeiro i
     return numberOfTerminalSymbols, terminalSymbols
 
 
-def receive_AcceptanceStates():
+def receive_AcceptanceStates():# PRECISA FAZER O TESTE 
         inputStages = input()
         try:
             AcceptanceStages = inputStages.split()
