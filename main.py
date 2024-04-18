@@ -55,7 +55,7 @@ def receive_Transitions():
     numberOfTransitions = int(input())
     return numberOfTransitions
 
-def InitialFinal_Transitions():
+def receive_InitialFinal_Transitions():
     transitions = []
     for i in range(numberOfTransitions):
         transitions = input(format(i+1))
