@@ -61,7 +61,23 @@ def receive_InitialFinal_Transitions():
         transitions = input(format(i+1))
         transitions.append(transitions.split())
     return transitions
-     
+
+def receive_numberOfChains():
+    numberOfChains = int(input())
+    if(numberOfChains > 10):
+        print("too much chains")
+    return numberOfChains
+
+def receive_Chains():
+    chains = []
+    for i in range(receive_numberOfChains):
+        chain = input(format(i+1))
+        while len(chain) > 20:
+            print("Chain should have at most 20 characters.")
+            chain = input(format(i+1))
+        chains.append(chain)
+    return chains
+ 
 
 if __name__ == "__main__": # Main function
     receive_input()
