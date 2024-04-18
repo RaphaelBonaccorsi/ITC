@@ -51,7 +51,17 @@ def receive_AcceptanceStates():
         except Exception as e:
             return e
             
-            
+def receive_Transitions():
+    numberOfTransitions = int(input())
+    return numberOfTransitions
+
+def InitialFinal_Transitions():
+    transitions = []
+    for i in range(numberOfTransitions):
+        transitions = input(format(i+1))
+        transitions.append(transitions.split())
+    return transitions
+     
 
 if __name__ == "__main__": # Main function
     receive_input()
