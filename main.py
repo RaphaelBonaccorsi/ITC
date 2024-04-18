@@ -1,12 +1,3 @@
-def receive_input():
-    numberOfStates = receive_numberOfStates()
-    numberOfTerminalSymbols, terminalSymbols = receive_terminalSymbols()
-    numberOfAcceptanceStages, AcceptanceStages = receive_AcceptanceStates()
-    numberOfTransitions = receive_Transitions()
-    transitions = receive_InitialFinal_Transitions()
-    numberOfChains = receive_numberOfChains()
-    chains = receive_Chains(numberOfChains)
-
 def receive_numberOfStates(): # First input, number of states
     while True:
         numberOfStates = input() # Number of states, first input
@@ -99,12 +90,23 @@ def receive_Chains(numberOfChains): # Receive chains
     chains = []
     for i in range(numberOfChains):
         chain = input()
-        if len(chain) > 20:
-            print("Chain too long")
+        if len(chain) > 20 or len(chain) < 1:
+            print("Invalid chain length")
             exit(0)
         chains.append(chain)
+    if len(chains) != numberOfChains:
+        print("Invalid number of chains")
+        exit(0)
     return chains
  
+def initialize_graph(numberOfStates):
+    pass
 
 if __name__ == "__main__": # Main function
-    receive_input()
+    numberOfStates = receive_numberOfStates()
+    numberOfTerminalSymbols, terminalSymbols = receive_terminalSymbols()
+    numberOfAcceptanceStages, AcceptanceStages = receive_AcceptanceStates()
+    numberOfTransitions = receive_Transitions()
+    transitions = receive_InitialFinal_Transitions()
+    numberOfChains = receive_numberOfChains()
+    chains = receive_Chains(numberOfChains)
