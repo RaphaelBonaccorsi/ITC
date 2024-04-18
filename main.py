@@ -35,5 +35,23 @@ def receive_terminalSymbols(): # Criar try except para verificar se o primeiro i
     return numberOfTerminalSymbols, terminalSymbols
 
 
+def receive_AcceptanceStates():
+        inputStages = input()
+        try:
+            AcceptanceStages = inputStages.split()
+
+            numberOfAcceptanceStages = int(AcceptanceStages[0])
+            AcceptanceStages = AcceptanceStages[1:]
+
+            for i in range(len(AcceptanceStages)):
+                AcceptanceStages[i] = int(AcceptanceStages[i])
+            
+        
+            return numberOfAcceptanceStages, AcceptanceStages
+        except Exception as e:
+            return e
+            
+            
+
 if __name__ == "__main__": # Main function
     receive_input()
