@@ -99,14 +99,21 @@ def receive_Chains(numberOfChains): # Receive chains
         exit(0)
     return chains
  
-def initialize_graph(numberOfStates):
-    pass
+def initialize_graph(transitions):
+    graph = {}
+    for i in transitions:
+        key = i[0]
+        value = i[2:]
+        graph[key] = graph.get(key, []) + [value]
+    return graph
 
 if __name__ == "__main__": # Main function
     numberOfStates = receive_numberOfStates()
     numberOfTerminalSymbols, terminalSymbols = receive_terminalSymbols()
-    numberOfAcceptanceStages, AcceptanceStages = receive_AcceptanceStates()
+    numberOfAcceptanceStates, acceptanceStates = receive_AcceptanceStates()
     numberOfTransitions = receive_Transitions()
     transitions = receive_InitialFinal_Transitions()
     numberOfChains = receive_numberOfChains()
     chains = receive_Chains(numberOfChains)
+    graph = initialize_graph(transitions)
+    print(graph)
