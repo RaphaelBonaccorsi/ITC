@@ -119,6 +119,22 @@ def is_AFN(graph):
                 transition_dict[symbol] = next_state
     return False  # Não encontramos nenhum AFN
     
+def is_accepted(graph, chain, acceptanceStates):
+    current_state = '0'
+    for symbol in chain:
+        if current_state not in graph:
+            return False
+        transitions = graph[current_state]
+        next_state = None
+        for transition in transitions:
+            if transition.startswith(symbol):
+                next_state = transition[len(symbol)+1:]
+                break
+        if next_state is None:
+            return False
+        current_state = next_state
+    return current_state in acceptanceStates
+
 if __name__ == "__main__": # Main function
     numberOfStates = receive_numberOfStates()
     numberOfTerminalSymbols, terminalSymbols = receive_terminalSymbols()
@@ -128,8 +144,8 @@ if __name__ == "__main__": # Main function
     numberOfChains = receive_numberOfChains()
     chains = receive_Chains(numberOfChains)
     graph = initialize_graph(transitions)
-    if is_AFN(grapf):
+    if is_AFN(graph):
         print("grafo é AFN")
     else:
         print("grafo é AFD")
-    print(graph)
+    
