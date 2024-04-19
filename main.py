@@ -118,6 +118,47 @@ def is_AFN(graph):
             else:
                 transition_dict[symbol] = next_state
     return False  # Não encontramos nenhum AFN
+
+def convert(graph, caracters):
+    translate = {}
+    afd = {}
+    total_states = 0
+    start_state = '0'  # Estado inicial do DFA
+    to_check = [start_state]  # Lista de estados para verificar
+
+    # Mapeia o estado inicial do NFA para o estado inicial do DFA
+    translate[start_state] = total_states
+    afd[total_states] = []
+    total_states += 1
+
+    # Loop principal para converter estados
+    while to_check:
+        cur = to_check.pop()
+  
+        for cur_caracter in caracters:
+            new_state = []
+            for i in cur.strip():
+                for j in graph[i]: 
+                    caracter, next_state = j.split()
+                    if cur_caracter == caracter:
+                        if next_state not in new_state:
+                            new_state.append(next_state)
+            new_state.sort()                
+
+            # Ordena os novos estados
+
+            # Adiciona o novo estado ao DFA se ainda não estiver mapeado
+            if "".join(new_state) not in translate:
+                to_check.append("".join(new_state))
+                translate["".join(new_state)] = total_states
+                afd[total_states] = []
+                total_states += 1
+            
+        # Adiciona a transição ao DFA
+            afd[translate[cur]].append(cur_caracter + " " + str(translate["".join(new_state)]))
+
+
+    return afd
     
 def is_accepted(graph, chain, acceptanceStates):
     current_state = '0'
@@ -144,8 +185,11 @@ if __name__ == "__main__": # Main function
     numberOfChains = receive_numberOfChains()
     chains = receive_Chains(numberOfChains)
     graph = initialize_graph(transitions)
+
     if is_AFN(graph):
-        print("grafo é AFN")
-    else:
-        print("grafo é AFD")
+            graph_determ = convert(graph, terminalSymbols)
+            #usar função de determinar
+        
+        #usar a função de
+    
     
