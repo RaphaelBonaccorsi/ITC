@@ -106,7 +106,19 @@ def initialize_graph(transitions):
         value = i[2:]
         graph[key] = graph.get(key, []) + [value]
     return graph
-
+    
+def is_AFN(graph):
+    for state, transitions in graph.items():
+        transition_dict = {}
+        for transition in transitions:
+            symbol, next_state = transition.split()
+            if symbol in transition_dict:
+                if next_state != transition_dict[symbol]:
+                    return True  # Encontramos um AFN
+            else:
+                transition_dict[symbol] = next_state
+    return False  # Não encontramos nenhum AFN
+    
 if __name__ == "__main__": # Main function
     numberOfStates = receive_numberOfStates()
     numberOfTerminalSymbols, terminalSymbols = receive_terminalSymbols()
@@ -116,4 +128,8 @@ if __name__ == "__main__": # Main function
     numberOfChains = receive_numberOfChains()
     chains = receive_Chains(numberOfChains)
     graph = initialize_graph(transitions)
+    if is_AFN(grapf):
+        print("grafo é AFN")
+    else:
+        print("grafo é AFD")
     print(graph)
