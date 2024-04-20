@@ -99,7 +99,7 @@ def receive_Chains(numberOfChains): # Receive chains
         exit(0)
     return chains
  
-def initialize_graph(transitions):
+def initialize_graph(transitions): # Create the graph on the format of a dictionary like {'0': ['a 1', 'b 1'], '1': ['a 1', 'b 2'], '2': ['a 0', 'b 2']}
     graph = {}
     for i in transitions:
         key = i[0]
@@ -190,10 +190,9 @@ if __name__ == "__main__": # Main function
     graph = initialize_graph(transitions)
 
     if is_AFN(graph):
-
         graph = convert(graph, terminalSymbols)
 
-    with open('/home/raphael/Desktop/ITC/output.txt', 'w') as file:
+    with open('./output.txt', 'w') as file:
         for chain in chains:
             if is_accepted(graph, chain, acceptanceStates):
                 file.write("aceita\n")
