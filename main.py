@@ -189,8 +189,9 @@ if __name__ == "__main__": # Main function
     chains = receive_Chains(numberOfChains)
     graph = initialize_graph(transitions)
 
-    #if not is_AFN(graph):
-    #    graph = convert(graph, terminalSymbols)
+    if is_AFN(graph):
+
+        graph = convert(graph, terminalSymbols)
 
     with open('/home/raphael/Desktop/ITC/output.txt', 'w') as file:
         for chain in chains:
